@@ -130,8 +130,8 @@ export class RecapPanel {
             const d = new Date(date);
             return d.getFullYear() === year;
         });
-        // const daysCount = yearDates.length;
-        const daysCount = 0;
+        const daysCount = yearDates.length;
+        // const daysCount = 0;
         
         let timeRange: 'daily' | 'weekly' | 'monthly' | 'yearly';
         let metrics: AggregatedMetrics;

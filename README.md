@@ -8,17 +8,17 @@ A beautiful, local-first "Spotify Wrapped" style recap for your coding activity.
 
 | **Intro** | **Activity Heatmap** | **Top Language** | **Hall of Fame** |
 | :---: | :---: | :---: | :---: |
-| ![Intro](./screenshots/intro.png) | ![Activity](./screenshots/activity.png) | ![Top Language](./screenshots/toplanguage.png) | ![Hall of Fame](./screenshots/halloffame.png) |
+| [![Intro](./screenshots/intro.png)](./screenshots/intro.png) | [![Activity](./screenshots/activity.png)](./screenshots/activity.png) | [![Top Language](./screenshots/toplanguage.png)](./screenshots/toplanguage.png) | [![Hall of Fame](./screenshots/halloffame.png)](./screenshots/halloffame.png) |
 
 | **Focus Blocks** | **Productivity** | **IDE Stats** | **Closing Summary** |
 | :---: | :---: | :---: | :---: |
-| ![Focus](./screenshots/focus.png) | ![Productivity](./screenshots/productivity.png) | ![IDE Stats](./screenshots/idestats.png) | ![Closing](./screenshots/closing.png) |
+| [![Focus](./screenshots/focus.png)](./screenshots/focus.png) | [![Productivity](./screenshots/productivity.png)](./screenshots/productivity.png) | [![IDE Stats](./screenshots/idestats.png)](./screenshots/idestats.png) | [![Closing](./screenshots/closing.png)](./screenshots/closing.png) |
 
 ### **Roast Mode (Sarcastic AI Analytics)**
 
 | **Language Roast** | **Hall of Fame Roast** |
 | :---: | :---: |
-| ![Top Language Roast](./screenshots/toplanguageroast.png) | ![Hall of Fame Roast](./screenshots/halloffameroast.png) |
+| [![Top Language Roast](./screenshots/toplanguageroast.png)](./screenshots/toplanguageroast.png) | [![Hall of Fame Roast](./screenshots/halloffameroast.png)](./screenshots/halloffameroast.png) |
 
 ## Features
 
