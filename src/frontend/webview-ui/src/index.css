@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lunar-50: #e2f5e9;
+  --color-lunar-100: #b6e6ca;
+  --color-lunar-200: #9bc5ac;
+  --color-lunar-300: #84a893;
+  --color-lunar-400: #6e8d7b;
+  --color-lunar-500: #5b7465;
+  --color-lunar-600: #485d51;
+  --color-lunar-700: #37483e;
+  --color-lunar-800: #29362e;
+  --color-lunar-900: #161f1a;
+  --color-lunar-950: #0c120f;
+
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#1e1e1e] text-[#cccccc] font-sans overflow-x-hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+}
+
+/* Custom scrollbar to match VS Code */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(121, 121, 121, 0.4);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.7);
+}

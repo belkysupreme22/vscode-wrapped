@@ -1,0 +1,61 @@
+export interface DailyMetrics {
+    date: string;
+    filesEdited: string[];
+    languages: Record<string, number>;
+    debugSessions: number;
+    testRuns: number;
+    failedBuilds: number;
+    terminalLaunches: number;
+    searches: number;
+    snippetExpansions: number;
+    refactorCommands: number;
+    focusBlocks: number;
+    codingTimeMinutes: number;
+    projects: string[];
+    linesAdded: number;
+    linesDeleted: number;
+    totalEdits: number;
+    filesCreated: number;
+    filesDeleted: number;
+    hourlyActivity: Record<number, number>;
+    dayOfWeekActivity: Record<number, number>;
+    lateNightMinutes: number;
+    weekendMinutes: number;
+    longestSessionMinutes: number;
+    intellisenseAccepts: number;
+    goToDefinitionCount: number;
+    formatDocumentCount: number;
+    quickFixesApplied: number;
+}
+
+export interface AggregatedMetrics {
+    daysOpened: number;
+    totalLinesAdded: number;
+    totalLinesDeleted: number;
+    totalEdits: number;
+    totalFilesCreated: number;
+    totalFilesDeleted: number;
+    totalDebugSessions: number;
+    totalTerminalLaunches: number;
+    totalFocusBlocks: number;
+    totalCodingTimeMinutes: number;
+    lateNightSessionCount: number;
+    totalLateNightMinutes: number;
+    totalWeekendMinutes: number;
+    weekendCodingPercentage: number;
+    longestSessionMinutes: number;
+    totalIntelliSenseAccepts: number;
+    totalGoToDefinition: number;
+    totalFormatDocument: number;
+    totalQuickFixes: number;
+    totalFailedBuilds: number;
+    topLanguages: { language: string; count: number }[];
+    topProjects: { project: string; count: number }[];
+    activityByHour: Record<number, number>;
+    activityByDay: Record<number, number>;
+    mostProductiveHour: number;
+    mostProductiveDay: number;
+    streak: number;
+    achievements: string[];
+    dailyHistory: { date: string; count: number }[];
+}

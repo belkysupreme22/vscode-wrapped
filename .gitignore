@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+src/frontend/webview-ui/node_modules/
+
+# Build outputs
+dist/
+out/
+build/
+*.vsix
+
+# IDE and Editor files
+.vscode-test/
+.history/
+*.log
+.DS_Store
+Thumbs.db
+
+# Environment and Secrets
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo

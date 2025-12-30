@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "outDir": "out",
+    "lib": [
+      "es2020"
+    ],
+    "types": [
+      "vscode",
+      "node",
+      "mocha"
+    ],
+    "sourceMap": true,
+    "rootDir": "src",
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules",
+    ".vscode-test",
+    "dist",
+    "src/frontend/webview",
+    "src/frontend/webview-ui"
+  ]
+}
