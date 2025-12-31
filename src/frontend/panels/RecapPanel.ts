@@ -141,11 +141,16 @@ export class RecapPanel {
             timeRange = 'yearly';
             console.log('[RecapPanel] No data available, using MOCK data');
             metrics = this.getMockMetrics();
+        } else if (now.getMonth() === 11) {
+            // It's December! Force Yearly recap for the "Wrapped" experience
+            timeRange = 'yearly';
+            console.log(`[RecapPanel] December detected! Showing YEARLY stats (${daysCount} days of data)`);
+            metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (daysCount < 7) {
-            // Recent activity
-            timeRange = 'daily';
-            console.log(`[RecapPanel] Showing RECENT stats (${daysCount} days of data)`);
-            metrics = this._metricsStore.getAggregatedMetrics(year, month, timeRange);
+            // Recent activity - aggregate all of it so far (cumulative) instead of daily
+            timeRange = 'yearly';
+            console.log(`[RecapPanel] Showing RECENT stats cumulative (${daysCount} days of data)`);
+            metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (daysCount < 30) {
             // Less than a month - show weekly
             timeRange = 'weekly';

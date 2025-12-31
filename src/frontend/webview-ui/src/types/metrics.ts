@@ -53,8 +53,8 @@ export interface AggregatedMetrics {
     topProjects: { project: string; count: number }[];
     activityByHour: Record<number, number>;
     activityByDay: Record<number, number>;
-    mostProductiveHour: number;
-    mostProductiveDay: number;
+    mostProductiveHour: number | null;
+    mostProductiveDay: number | null;
     streak: number;
     achievements: string[];
     dailyHistory: { date: string; count: number }[];

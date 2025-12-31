@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AggregatedMetrics } from '../types/metrics';
 import { getAchievementIcon } from '../utils/formatters';
+import EmptyState from '../components/EmptyState';
 
 interface SlideProps {
   metrics: AggregatedMetrics;
@@ -40,9 +41,7 @@ export default function AchievementsSlide({ metrics, isRoastMode, roast }: Slide
             </motion.div>
           ))
         ) : (
-          <div className="text-lunar-500 font-mono italic p-12 text-center border-2 border-dashed border-lunar-800 rounded-3xl w-full">
-            No achievements found. Your story is just beginning...
-          </div>
+          <EmptyState message="No achievements found. Your story is just beginning..." />
         )}
       </div>
 

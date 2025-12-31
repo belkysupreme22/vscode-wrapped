@@ -48,7 +48,7 @@ export function calculateAchievements(metrics: AggregatedMetrics): string[] {
     }
     
     // Early Bird - Most productive hour is before 7am
-    if (metrics.mostProductiveHour >= 5 && metrics.mostProductiveHour < 7) {
+    if (metrics.mostProductiveHour !== null && metrics.mostProductiveHour >= 5 && metrics.mostProductiveHour < 7) {
         achievements.push('Early Bird');
     }
     

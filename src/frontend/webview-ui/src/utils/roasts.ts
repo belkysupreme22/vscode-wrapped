@@ -18,7 +18,10 @@ export function generateRoasts(m: AggregatedMetrics): Record<number, string> {
     else roasts[2] = `${formatNumber(m.totalLinesAdded)} lines added. ${formatNumber(m.totalLinesDeleted)} deleted. At least you're learning.`;
 
     // 3: Languages List
-    roasts[3] = `${m.topLanguages.length} languages. Jack of all trades, master of none.`;
+roasts[3] =
+  m.topLanguages.length > 10
+    ? `${m.topLanguages.length} languages. Jack of all trades, master of Stack Overflow.`
+    : `${m.topLanguages.length} languages. Still flirting with your tech stack.`;
 
     // 4: Top Language
     const topLang = m.topLanguages[0]?.language || 'text';
@@ -45,7 +48,7 @@ export function generateRoasts(m: AggregatedMetrics): Record<number, string> {
     roasts[9] = m.achievements.length > 0 ? "Achievements unlocked! Too bad they don't pay the bills." : "No achievements? Shocking.";
 
     // 10: Closing
-    roasts[10] = "See you next year. Try to break fewer things.";
+    roasts[10] = "See you next time. Try to break fewer things.";
     
     return roasts;
 }
