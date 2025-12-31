@@ -72,7 +72,7 @@ export function getAchievementIcon(achievement: string): string {
 
 export function getWelcomeMessage(daysOpened: number): string {
     const isDecember = new Date().getMonth() === 11;
-    if (daysOpened <= 1) return 'Your Day in Code';
+    if (daysOpened <= 1 && !isDecember) return 'Your Day in Code';
     if (isDecember) return 'Your Year in Code';
     if (daysOpened < 7) return 'Your Recent Activity';
     if (daysOpened === 7) return 'Your Weekly Activity';
