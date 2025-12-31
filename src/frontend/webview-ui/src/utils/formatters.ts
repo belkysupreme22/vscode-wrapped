@@ -75,8 +75,9 @@ export function getWelcomeMessage(daysOpened: number): string {
     if (daysOpened <= 1) return 'Your Day in Code';
     if (isDecember) return 'Your Year in Code';
     if (daysOpened < 7) return 'Your Recent Activity';
-    if (daysOpened < 14) return 'Your Week in Code';
-    if (daysOpened < 45) return 'Your Month in Code';
-    if (daysOpened < 300) return 'Your Year So Far';
+    if (daysOpened === 7) return 'Your Weekly Activity';
+    if (daysOpened < 30) return 'Your Month So Far';
+    if (daysOpened === 30) return 'Your Month in Code';
+    if (daysOpened < 365) return 'Your Year So Far';
     return 'Your Year in Code';
 }
