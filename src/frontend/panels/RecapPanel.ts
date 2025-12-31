@@ -148,7 +148,7 @@ export class RecapPanel {
             metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (daysCount < 7) {
             // Recent activity - aggregate all of it so far (cumulative) instead of daily
-            timeRange = 'yearly';
+            timeRange = 'weekly';
             console.log(`[RecapPanel] Showing RECENT stats cumulative (${daysCount} days of data)`);
             metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (daysCount < 30) {
