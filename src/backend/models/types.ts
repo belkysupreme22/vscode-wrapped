@@ -56,8 +56,8 @@ export interface AggregatedMetrics {
     totalEdits: number;
     totalFilesCreated: number;
     totalFilesDeleted: number;
-    mostProductiveHour: number; // 0-23
-    mostProductiveDay: number; // 0-6 (0=Sunday)
+    mostProductiveHour: number | null; // 0-23 or null if no activity
+    mostProductiveDay: number | null; // 0-6 (0=Sunday) or null if no activity
     lateNightSessionCount: number;
     totalLateNightMinutes: number;
     weekendCodingPercentage: number; // 0-100

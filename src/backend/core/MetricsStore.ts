@@ -166,8 +166,8 @@ export class MetricsStore {
             totalEdits: 0,
             totalFilesCreated: 0,
             totalFilesDeleted: 0,
-            mostProductiveHour: 0,
-            mostProductiveDay: 0,
+            mostProductiveHour: null,
+            mostProductiveDay: null,
             streak: 0,
             lateNightSessionCount: 0,
             totalLateNightMinutes: 0,
@@ -288,14 +288,14 @@ export class MetricsStore {
         // Find most productive hour
         const maxHourActivity = Math.max(...Object.values(hourlyActivityCounts), 0);
         aggregated.mostProductiveHour = maxHourActivity > 0
-            ? Number(Object.keys(hourlyActivityCounts).find(h => hourlyActivityCounts[Number(h)] === maxHourActivity) || 0)
-            : 0;
+            ? Number(Object.keys(hourlyActivityCounts).find(h => hourlyActivityCounts[Number(h)] === maxHourActivity))
+            : null;
         
         // Find most productive day of week
         const maxDayActivity = Math.max(...Object.values(dayOfWeekActivityCounts), 0);
         aggregated.mostProductiveDay = maxDayActivity > 0
-            ? Number(Object.keys(dayOfWeekActivityCounts).find(d => dayOfWeekActivityCounts[Number(d)] === maxDayActivity) || 0)
-            : 0;
+            ? Number(Object.keys(dayOfWeekActivityCounts).find(d => dayOfWeekActivityCounts[Number(d)] === maxDayActivity))
+            : null;
         
         // Pass the hourly and daily activity to frontend
         aggregated.activityByHour = hourlyActivityCounts;

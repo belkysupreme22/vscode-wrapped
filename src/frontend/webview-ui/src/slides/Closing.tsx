@@ -26,7 +26,9 @@ export default function ClosingSlide({ metrics, isRoastMode, roast }: SlideProps
             THAT'S A WRAP.
         </motion.h2>
         <p className="text-lunar-400 text-xl font-medium">
-            {metrics.daysOpened < 365 ? "Keep building your momentum." : `Keep breaking things in ${new Date().getFullYear() + 1}.`}
+            {new Date().getMonth() === 11 
+              ? `Keep breaking things in ${new Date().getFullYear() + 1}.` 
+              : "Keep building your momentum."}
         </p>
       </div>
 

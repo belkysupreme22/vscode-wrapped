@@ -16,19 +16,11 @@ interface SlideProps {
   timeRange?: 'daily' | 'weekly' | 'monthly' | 'yearly';
 }
 
-/**
- * ProductivitySlide handles the visualization of coding activity over time.
- * It dynamically switches between three distinct grid layouts (Weekly, Monthly, Yearly)
- * based on the quantified data available in the metrics payload.
- */
 export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRange = 'weekly' }: SlideProps) {
-  const maxDayVal = Math.max(...Object.values(metrics.activityByDay));
-  const maxHistoryVal = Math.max(...metrics.dailyHistory.map(h => h.count), 1);
+  const maxDayVal = Math.max(...Object.values(metrics.activityByDay), 0);
+  const maxHistoryVal = Math.max(...metrics.dailyHistory.map(h => h.count), 0);
+  const hasActivity = maxDayVal > 0 || maxHistoryVal > 0;
 
-  /**
-   * Renders a GitHub-style activity grid (52 weeks x 7 days).
-   * It transforms the flat dailyHistory array into 2D columns for CSS Grid/Flex layout.
-   */
   const renderYearlyGrid = () => {
     const columns: { date: string, count: number }[][] = [];
     let currentColumn: { date: string, count: number }[] = [];
@@ -49,27 +41,16 @@ export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRan
         const firstDay = new Date(col[0].date);
         const month = firstDay.getMonth();
         if (month !== lastMonth) {
-            // Check if this is a starting December that would clash with January
             const isStartingDec = i === 0 && month === 11;
             const janIdx = columns.findIndex((c, idx) => idx > i && idx < i + 4 && new Date(c[0].date).getMonth() === 0);
             
-            if (isStartingDec && janIdx !== -1) {
-                // Skip this Dec in favor of the upcoming Jan
-                return; 
-            }
+            if (isStartingDec && janIdx !== -1) return; 
 
-            // Ensure at least 3 columns width breathing room between labels
             const lastLabelsIdx = monthLabels.length > 0 ? monthLabels[monthLabels.length - 1].colIndex : -10;
             if (i - lastLabelsIdx > 3) {
-                // Prevent showing Dec twice if it already appeared at the start (edge case protection)
-                if (month === 11 && monthLabels.some(l => l.name === 'Dec')) {
-                    return;
-                }
+                if (month === 11 && monthLabels.some(l => l.name === 'Dec')) return;
 
-                monthLabels.push({
-                    name: MONTH_NAMES[month],
-                    colIndex: i
-                });
+                monthLabels.push({ name: MONTH_NAMES[month], colIndex: i });
                 lastMonth = month;
             }
         }
@@ -77,7 +58,6 @@ export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRan
 
     return (
         <div className="flex flex-col items-center">
-            {/* Month Labels Row */}
             <div className="flex w-full overflow-hidden mb-2 relative h-4">
                 {monthLabels.map((lbl, i) => (
                     <span 
@@ -124,7 +104,7 @@ export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRan
                 <span key={d} className="text-[10px] font-bold text-lunar-600 text-center">{d}</span>
             ))}
             {metrics.dailyHistory.map((day) => {
-                const intensity = day.count / maxHistoryVal;
+                const intensity = maxHistoryVal > 0 ? day.count / maxHistoryVal : 0;
                 const isPeak = day.count === maxHistoryVal && day.count > 0;
                 return (
                     <motion.div 
@@ -151,7 +131,7 @@ export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRan
         {[0, 1, 2, 3, 4, 5, 6].map((day) => {
           const val = metrics.activityByDay[day] || 0;
           const intensity = maxDayVal > 0 ? (val / maxDayVal) : 0;
-          const isMostProductive = day === metrics.mostProductiveDay;
+          const isMostProductive = hasActivity && day === metrics.mostProductiveDay;
           
           return (
             <div key={day} className="flex flex-col items-center gap-3">
@@ -200,7 +180,11 @@ export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRan
             {timeRange === 'yearly' ? 'A Year of Progress' : timeRange === 'monthly' ? 'Monthly Momentum' : 'Your Weekly Rhythm'}
         </h2>
         <p className="text-lunar-400">
-            {timeRange === 'yearly' ? `${metrics.daysOpened} days of impact` : `Most productive on ${getDayName(metrics.mostProductiveDay)}s`}
+            {timeRange === 'yearly' 
+              ? `${metrics.daysOpened} days of impact` 
+              : hasActivity 
+                ? `Most productive on ${getDayName(metrics.mostProductiveDay)}s`
+                : "Awaiting your first coding spree..."}
         </p>
       </div>
 
@@ -229,7 +213,7 @@ export default function ProductivitySlide({ metrics, isRoastMode, roast, timeRan
         </div>
       </div>
 
-      {isRoastMode && roast && (
+      {isRoastMode && roast && hasActivity && (
         <p className="text-center text-red-400 italic font-medium px-8">"{roast}"</p>
       )}
     </motion.div>
