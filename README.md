@@ -1,7 +1,5 @@
 # VS Code Wrapped
 
-[GitHub Repository](https://github.com/belkysupreme22/vscode-wrapped)
-
 A beautiful, local-first "Spotify Wrapped" style recap for your coding activity.
 
 ## Recap Gallery
@@ -37,7 +35,8 @@ A beautiful, local-first "Spotify Wrapped" style recap for your coding activity.
 ## Installation
 
 Install via the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=beamlakfekad.vscode-wrapped).
+Also available on cursor and antigravity [Open VSX Registry](https://open-vsx.org/extension/beamlakfekad/vscode-wrapped).
 
 ## Support
 
-If you enjoy this extension, please leave a review!
+If you enjoy this extension, please give it a rating and leave a review!
