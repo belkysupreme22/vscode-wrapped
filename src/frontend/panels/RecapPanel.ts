@@ -137,14 +137,19 @@ export class RecapPanel {
         let metrics: AggregatedMetrics;
         
         if (daysCount === 0) {
-            // No data yet - use mock data
-            timeRange = 'yearly';
-            console.log('[RecapPanel] No data available, using MOCK data');
-            metrics = this.getMockMetrics();
+            // No data yet - show empty state (zeros)
+            timeRange = 'daily';
+            console.log('[RecapPanel] No data available for this year yet. Showing empty stats.');
+            metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (now.getMonth() === 11) {
             // It's December! Force Yearly recap for the "Wrapped" experience
             timeRange = 'yearly';
             console.log(`[RecapPanel] December detected! Showing YEARLY stats (${daysCount} days of data)`);
+            metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
+        } else if (daysCount === 1) {
+            // Single day of activity - show daily
+            timeRange = 'daily';
+            console.log('[RecapPanel] Single day of activity. Showing DAILY stats.');
             metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (daysCount < 7) {
             // Recent activity - aggregate all of it so far (cumulative) instead of daily
@@ -174,69 +179,7 @@ export class RecapPanel {
         });
     }
     
-    private getMockMetrics(): AggregatedMetrics {
-        return {
-            year: 2025,
-            daysOpened: 142,
-            longestStreak: 12,
-            streak: 12,
-            totalCodingTimeMinutes: 4500,
-            topLanguages: [
-                { language: 'rust', count: 2300 },
-                { language: 'typescript', count: 1500 },
-                { language: 'python', count: 800 },
-                { language: 'javascript', count: 250 },
-                { language: 'html', count: 180 },
-                { language: 'css', count: 150 }
-            ],
-            totalDebugSessions: 45,
-            totalTestRuns: 120,
-            totalFailedBuilds: 88,
-            totalTerminalLaunches: 80,
-            totalSearches: 200,
-            totalSnippetExpansions: 50,
-            totalRefactorCommands: 10,
-            totalFocusBlocks: 25,
-            uniqueFilesCount: 300,
-            uniqueProjectsCount: 5,
-            
-            // New MVP metrics
-            totalLinesAdded: 15420,
-            totalLinesDeleted: 8230,
-            netLines: 7190,
-            totalEdits: 3240,
-            totalFilesCreated: 45,
-            totalFilesDeleted: 12,
-            mostProductiveHour: 14, // 2 PM
-            mostProductiveDay: 5, // Tuesday
-            lateNightSessionCount: 18,
-            totalLateNightMinutes: 450,
-            weekendCodingPercentage: 25,
-            longestSessionMinutes: 180, // 3 hours
-            totalIntelliSenseAccepts: 1250,
-            totalGoToDefinition: 340,
-            totalFormatDocument: 89,
-            totalQuickFixes: 156,
-            activityByHour: { 14: 50 },
-            activityByDay: { 2: 100 },
-            achievements: ['Night Owl', 'Weekend Warrior', 'Speed Demon', 'Polyglot'],
-            dailyHistory: this.generateMockDailyHistory()
-        };
-    }
 
-    private generateMockDailyHistory(): { date: string, count: number }[] {
-        const history = [];
-        const now = new Date();
-        // Generate last 365 days for the yearly view mock
-        for (let i = 365; i >= 0; i--) {
-            const d = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
-            history.push({
-                date: d.toISOString().split('T')[0],
-                count: Math.floor(Math.random() * 50)
-            });
-        }
-        return history;
-    }
 
     public dispose() {
         RecapPanel.currentPanel = undefined;
