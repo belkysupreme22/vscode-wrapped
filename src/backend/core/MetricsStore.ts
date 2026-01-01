@@ -115,14 +115,18 @@ export class MetricsStore {
         if (timeRange === 'daily') {
             // Only today
             const today = this.getTodayDate();
-            relevantDates = Object.keys(allMetrics).filter(date => date === today);
+            relevantDates = Object.keys(allMetrics).filter(date => {
+                const d = new Date(date);
+                return date === today && d.getFullYear() === year;
+            });
             
         } else if (timeRange === 'weekly') {
             // Last 7 days
             const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
             relevantDates = Object.keys(allMetrics).filter(date => {
                 const d = new Date(date);
-                return d >= weekAgo && d <= now;
+                // Ensure the date is within the last week AND belongs to the requested year
+                return d >= weekAgo && d <= now && d.getFullYear() === year;
             });
             
         } else if (timeRange === 'monthly') {
