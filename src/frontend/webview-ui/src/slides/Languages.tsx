@@ -21,7 +21,7 @@ export default function LanguagesSlide({ metrics, isRoastMode, roast }: SlidePro
     >
       <div className="text-center">
         <h2 className="text-3xl font-bold text-lunar-100 mb-2">Your Linguistic DNA</h2>
-        <p className="text-lunar-400">The tools you mastered this year</p>
+        <p className="text-lunar-400">The tools you mastered</p>
       </div>
 
       {hasLanguages ? (

@@ -126,6 +126,7 @@ export class RecapPanel {
         
         // Determine time range based on available data
         const allMetrics = this._metricsStore.getAllRawMetrics();
+        console.log('[RecapPanel] All raw metrics dates:', Object.keys(allMetrics));
         const yearDates = Object.keys(allMetrics).filter(date => {
             const d = new Date(date);
             return d.getFullYear() === year;
@@ -133,7 +134,7 @@ export class RecapPanel {
         const daysCount = yearDates.length;
         // const daysCount = 0;
         
-        let timeRange: 'daily' | 'weekly' | 'monthly' | 'yearly';
+        let timeRange: 'daily' | 'weekly' | 'monthSoFar' | 'monthly' | 'yearly';
         let metrics: AggregatedMetrics;
         
         if (daysCount === 0) {
@@ -151,17 +152,17 @@ export class RecapPanel {
             timeRange = 'daily';
             console.log('[RecapPanel] Single day of activity. Showing DAILY stats.');
             metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
-        } else if (daysCount < 7) {
+        } else if (daysCount <= 7) {
             // Recent activity - aggregate all of it so far (cumulative) instead of daily
             timeRange = 'weekly';
             console.log(`[RecapPanel] Showing RECENT stats cumulative (${daysCount} days of data)`);
             metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
         } else if (daysCount < 30) {
             // Less than a month - show weekly
-            timeRange = 'weekly';
-            console.log('[RecapPanel] Showing WEEKLY stats (last 7 days)');
-            metrics = this._metricsStore.getAggregatedMetrics(year, month, timeRange);
-        } else if (daysCount < 90) {
+            timeRange = 'monthSoFar';
+            console.log(`[RecapPanel] Showing WEEKLY stats cumulative (${daysCount} days of data)`);
+            metrics = this._metricsStore.getAggregatedMetrics(year, undefined, timeRange);
+        } else if (daysCount === 30) {
             // Less than 3 months - show monthly
             timeRange = 'monthly';
             console.log('[RecapPanel] Showing MONTHLY stats (current month)');

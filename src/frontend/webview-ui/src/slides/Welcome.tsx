@@ -27,7 +27,7 @@ export default function WelcomeSlide({ metrics, isRoastMode, roast }: SlideProps
       </motion.div>
 
       <div className="space-y-2">
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-lunar-300">
+        <h1 className="text-5xl md:text-5xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white to-lunar-300">
           {getWelcomeMessage(metrics.daysOpened)}
         </h1>
         <p className="text-xl md:text-2xl text-lunar-400 font-medium tracking-wide">
